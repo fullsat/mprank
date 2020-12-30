@@ -1,37 +1,60 @@
 <template>
-  <div class="about">
-    <h1>SecondStage</h1>
-    <v-timeline
-      dense
-      >
-      <v-timeline-item
-        v-for="i in cursor"
-        :key="i"
-        >
-        <span slot="opposite"></span>
-        <v-card class="elevation-2">
-          <v-card-text>
-            <v-row>
-              <v-col cols=10>
-                {{ timelineitems[i-1].text($store) }}
-              </v-col>
-              <v-col cols=2>
-              <v-btn
-                small
-                @click="nextCursor(i)"> {{ timelineitems[i-1].buttontext }}</v-btn>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-timeline-item>
-    </v-timeline>
-    password：
-    <v-text-field
-      v-model="password"
-      >
-    </v-text-field>
-    <v-btn @click="next"> 次へ行く </v-btn>
-    入力できる回数:{{ chance }}
+  <div>
+    <v-container>
+      <v-card>
+        <v-card-title>2nd STAGE</v-card-title>
+        <v-card-subtitle>
+          <h1>～流されて生きるだけじゃつまらない～</h1>
+        </v-card-subtitle>
+      </v-card>
+      <br>
+
+      <v-card>
+        <v-card-text>
+          <v-timeline
+            dense
+            >
+            <v-timeline-item
+              v-for="i in cursor"
+              :key="i"
+              >
+              <span slot="opposite"></span>
+              <v-card class="elevation-2">
+                <v-card-text>
+                  <v-row>
+                    <v-col cols=10>
+                      {{ timelineitems[i-1].text($store) }}
+                    </v-col>
+                    <v-col cols=2>
+                    <v-btn
+                      small
+                      @click="nextCursor(i)"> {{ timelineitems[i-1].buttontext }}</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+            </v-timeline-item>
+          </v-timeline>
+        </v-card-text>
+      </v-card>
+      <br>
+
+      <v-card>
+        <v-card-title>パスワード解除</v-card-title>
+        <v-card-text>
+          <v-text-field
+            v-model="password"
+            >
+          </v-text-field>
+          <p>入力できる回数はあと{{ chance }}回</p>
+          <v-btn
+            class="primary"
+            @click="next">
+            解除する
+          </v-btn>
+        </v-card-text>
+      </v-card>
+    </v-container>
   </div>
 </template>
 

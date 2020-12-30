@@ -13,7 +13,7 @@
             align="center"
           >
             <v-col>
-              <div>摩美々が<b>283パス</b>に<b>カギ</b>をかけてしまった。パスワードを聞くもどうやらうろ覚えで忘れてしまったらしい。このままだとアイドルのメモ帳がつかえず、<b>プロデュース活動に支障</b>が出てしまうぞ。何とかしないと・・・</div>
+              <div>摩美々が<b>283パス</b>に<b>カギ</b>をかけてしまった。パスワードを聞くもうろ覚えで忘れてしまったらしい。このままだとアイドルのメモ帳がつかえず、<b>プロデュース活動に支障</b>が出てしまうぞ。何とかしないと・・・</div>
             </v-col>
           </v-row>
 
@@ -24,7 +24,25 @@
             id="gamestart"
             color=primary
             rounded
-            @click="startGame"> 283パスを取り戻せ！ </v-btn>
+            @click="startGame"> 283パスを取り戻せ！ (Game Start)</v-btn>
+        </v-card-text>
+      </v-card>
+      <br>
+      <v-card>
+        <v-card-title>
+          THE IDOL M@STER Shiny Colorsとは？
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <p>やれば分かる。やるのだ。</p>
+          <p><a href="https://shinycolors.enza.fun/">https://shinycolors.enza.fun/</a></p>
+          <h4>おススメポイント</h4>
+          <ul>
+            <li>イラストがいい</li>
+            <li>コミュがいい</li>
+            <li>グレフェスはそこそこ奥が深い</li>
+            <li>楽しい</li>
+          </ul>
         </v-card-text>
       </v-card>
 

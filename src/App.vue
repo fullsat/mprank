@@ -49,15 +49,17 @@ html {
   height: 100%;
 
   position: relative;
-  background-image: url("//onocom.net/code/wp-content/uploads/2018/01/loop_bg.png");
+  background-image: url("./static/bg.png");
   background-repeat: repeat;
   animation: bg-slider 23s linear infinite;
+  background-color:rgba(255,255,255,0.7);
+  background-blend-mode:lighten;
   margin: 0;
   padding: 0;
 }
 @keyframes bg-slider {
   from { background-position: 0 0; }
-  to { background-position: -1518px 0; } /* 1518pxとは使用した背景画像の長さ */
+  to { background-position: 597px -597px;}
 }
 
 #gametitle {

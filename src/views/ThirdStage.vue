@@ -1,54 +1,78 @@
 <template>
-  <v-card
-    class="mx-auto"
-    max-width="500"
-  >
+  <div>
+    <v-container>
+      <v-card>
+        <v-card-title>3rd STAGE</v-card-title>
+        <v-card-subtitle>
+          <h1>～見た目に騙されるな！～</h1>
+        </v-card-subtitle>
+      </v-card>
+      <br>
 
-    <p>{{ hinttext }}</p>
-		<span :style="{color: selectqueue[0]}">■</span>
-		<span :style="{color: selectqueue[1]}">■</span>
-		<span :style="{color: selectqueue[2]}">■</span>
-		<span :style="{color: selectqueue[3]}">■</span>
-		<span :style="{color: selectqueue[4]}">■</span>
+      <hint-text
+        :text="hinttext"
+        hiddentext=""
+        >
+      </hint-text>
+      <br>
 
-    <v-sheet class="pa-4 primary lighten-2">
-      <v-text-field
-        v-model="search"
-        label="password"
-        dark
-        flat
-        solo-inverted
-        hide-details
-        clearable
-        clear-icon="mdi-close-circle-outline"
-      ></v-text-field>
+      <v-card>
+        <v-card-title>パスワード解除</v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <v-text-field
+            v-model="search"
+            label="パスワードを入力してください"
+            clearable
+            clear-icon="mdi-close-circle-outline"
+          ></v-text-field>
+          <p>入力できる回数はあと{{ chance }}回</p>
+          <v-btn
+            class="primary"
+            @click="next"
+            > 
+            解除する
+          </v-btn>
+        </v-card-text>
+      </v-card>
+      <br>
 
-      <v-btn 
-        small
-        @click="next"> パスワード送信 </v-btn>
-      入力できる回数:{{ chance }}
-    </v-sheet>
-    <v-card-text>
-      <v-treeview
-        hoverable
-        open-all
-        :items="items"
-        :search="search"
-        :filter="filter"
+      <v-card
+        class="mx-auto"
       >
-      <template v-slot:prepend="{ item }">
-        <v-icon @click="selectColor(item)" :color="item.color"> mdi-crop-square </v-icon>
-        
-      </template>
-      </v-treeview>
-    </v-card-text>
-  </v-card>
+    
+        <span :style="{color: selectqueue[0]}">■</span>
+        <span :style="{color: selectqueue[1]}">■</span>
+        <span :style="{color: selectqueue[2]}">■</span>
+        <span :style="{color: selectqueue[3]}">■</span>
+        <span :style="{color: selectqueue[4]}">■</span>
+    
+        <v-card-text>
+          <v-treeview
+            hoverable
+            open-all
+            :items="items"
+            :search="search"
+            :filter="filter"
+          >
+          <template v-slot:prepend="{ item }">
+            <v-icon @click="selectColor(item)" :color="item.color"> mdi-crop-square </v-icon>
+            
+          </template>
+          </v-treeview>
+        </v-card-text>
+      </v-card>
+    </v-container>
+  </div>
 </template>
 
 <script>
+import HintText from '@/components/HintText'
+
 export default {
-  name: 'Home',
+  name: 'ThirdStage',
   components: {
+    HintText,
   },
   data: () => ({
     selectqueue: ['','','','',''],
@@ -253,7 +277,7 @@ export default {
     hinttext () {
       return this.activeHint() ?
              'あ、ごめんなさいー、黒、緑、青、赤、黄でしたぁ' :
-             '黄、赤、黒、青、緑ってメモしてますぅ'
+             '確かー、これが最後だと思いますー。ちゃんとメモしてますよー。黄、赤、黒、青、緑って書いてますねー。みんなの頭文字をローマ字にした記憶がありますー。あとぉ、どこかで英語を使った記憶があります。'
 
     },
     chance: function(){

@@ -1,17 +1,36 @@
 <template>
-  <div class="about">
+  <div>
     <v-container>
       <v-card>
-        <v-card-title>FirstStage</v-card-title>
+        <v-card-title>1st STAGE</v-card-title>
+        <v-card-subtitle>
+          <h1>～まみみは昔のホームページなんか知らない～</h1>
+        </v-card-subtitle>
+      </v-card>
+      <br>
+
+      <hint-text
+        :text="hinttextsrc[hinttextidx].hinttext"
+        :hiddentext="hinttextsrc[hinttextidx].hiddentext"
+        >
+      </hint-text>
+      <br>
+
+      <v-card>
+        <v-card-title>パスワード解除</v-card-title>
         <v-card-text>
-          <p id="firsthint">{{ hinttext }}</p>
-          password：
           <v-text-field
+            label="パスワードを入力してください"
             @input="changeText($event)"
             >
           </v-text-field>
-          <v-btn @click="next"> 次へ行く </v-btn>
-          入力できる回数:{{ chance }}
+          <p>入力できる回数はあと{{ chance }}回</p>
+          <v-btn
+            class="primary"
+            @click="next"
+            > 
+            解除する
+          </v-btn>
         </v-card-text>
       </v-card>
     </v-container>
@@ -19,14 +38,29 @@
 </template>
 
 <script>
-// %E3%82%A8%E3%83%B3%E3%82%B8%E3%83%AD%E3%82%A6
+import HintText from '@/components/HintText'
 export default {
-  name: 'Home',
+  name: 'FirstStage',
   components: {
+    HintText,
   },
   data: function() {
     return {
-      hinttext: 'debitaro',
+      hinttextidx: 0,
+      hinttextsrc: [
+        {
+          hinttext: "だからー、謝ってるじゃないですかぁ",
+          hiddentext: "--- メモ「デビ太郎」",
+        },
+        {
+          hinttext: "なんかー、昔のホームページで流行った方法でメモの場所を隠した記憶はあるんですけどー、パスワードが何かは忘れちゃいましたあ",
+          hiddentext: "--- メモ「デビ太郎」",
+        },
+        {
+          hinttext: "ローマ字だったきがしますー",
+          hiddentext: "--- メモ「デビ太郎」",
+        },
+      ],
       password: '',
     }
   },
@@ -57,19 +91,30 @@ export default {
       // unlock hint
       if(event == 'debitaro'){
         this.unlockhint()
-        this.hinttext = '%E3%81%9F%E3%81%8B%E3%82%84%E3%81%BE'
+        let hiddenhint = '--- メモ「高山」'
+        this.hinttextsrc[0].hiddentext = hiddenhint
+        this.hinttextsrc[1].hiddentext = hiddenhint
+        this.hinttextsrc[2].hiddentext = hiddenhint
       }else{
-        this.hinttext = 'debitaro'
+        let hiddenhint = '--- メモ「デビ太郎」'
+        this.hinttextsrc[0].hiddentext = hiddenhint
+        this.hinttextsrc[1].hiddentext = hiddenhint
+        this.hinttextsrc[2].hiddentext = hiddenhint
       }
 
       // update string
       this.password = event
+    },
+    changeHintTextIdx: function(){
+      this.hinttextidx = (this.hinttextidx + 1) % this.hinttextsrc.length
     },
   },
   created: function() {
     if(this.$store.state.chance1st <= 0){
       this.$router.push({path: 'firststage-badend'})
     }
+
+    setInterval(this.changeHintTextIdx, 8000)
   }
 }
 </script>
