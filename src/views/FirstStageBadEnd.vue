@@ -9,8 +9,19 @@
       <br>
 
       <hint-text
+        minHeight="100px"
         flavortext="メモ帳が永久にロックされてしまった・・・"
-        text="昔のホームページは反転文字というのが流行ったらしいですよ">
+        text="プロデューサー。それでも私のプロデューサーですかー？あー、あとー、もう一つ思い出したんですけど、昔のホームページは反転文字で隠し部屋を作ってたってニュースを見たんですよねー">
+
+        <v-avatar
+          size="64px"
+          class="ht-avatar"
+          >
+          <img
+            src="@/assets/avatar_mamimi.png"
+          />
+        </v-avatar>
+
       </hint-text>
       <br>
 

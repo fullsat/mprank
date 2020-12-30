@@ -4,15 +4,24 @@
       <v-card>
         <v-card-title>1st STAGE</v-card-title>
         <v-card-subtitle>
-          <h1>～まみみは昔のホームページなんか知らない～</h1>
+          <h2>昔のホームページなんか知らない</h2>
         </v-card-subtitle>
       </v-card>
       <br>
 
       <hint-text
+        minHeight="130px"
         :text="hinttextsrc[hinttextidx].hinttext"
         :hiddentext="hinttextsrc[hinttextidx].hiddentext"
         >
+        <v-avatar
+          size="64px"
+          class="ht-avatar"
+          >
+          <img
+            src="@/assets/avatar_mamimi.png"
+          />
+        </v-avatar>
       </hint-text>
       <br>
 
@@ -33,6 +42,20 @@
           </v-btn>
         </v-card-text>
       </v-card>
+
+      <v-snackbar
+        top
+        color="red lighten-1"
+        centered
+        rounded="true"
+        tag="div"
+        content-class="snackbar"
+        :value="true"
+        timeout=2000
+        v-model="notification"
+        >
+        <p>不正解！チャンスはあと{{ chance }} 回</p>
+      </v-snackbar>
     </v-container>
   </div>
 </template>
@@ -62,6 +85,7 @@ export default {
         },
       ],
       password: '',
+      notification: false,
     }
   },
   computed: {
@@ -84,6 +108,8 @@ export default {
         this.$store.commit('decrementChance', {'slot': 'chance1st'})
         if(this.$store.state.chance1st <= 0){
           this.$router.push({path: 'firststage-badend'})
+        }else{
+          this.notification = true
         }
       }
     },
@@ -123,4 +149,11 @@ export default {
 #firsthint {
   color: white;
 }
+
+.snackbar{
+  text-align: center;
+  color: #222;
+  font-size: 20px;
+}
+
 </style>

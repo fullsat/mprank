@@ -9,8 +9,17 @@
       <br>
 
       <hint-text
+        minHeight="100px"
         flavortext="メモ帳が永久にロックされてしまった・・・"
-        text="最初からやり直すって意味、勘違いしてませんかあ？">
+        text="最初からやり直って意味、勘違いしてませんかあ？リロードしなくても最初からやり直せますよねぇ？">
+        <v-avatar
+          size="64px"
+          class="ht-avatar"
+          >
+          <img
+            src="@/assets/avatar_mamimi.png"
+          />
+        </v-avatar>
       </hint-text>
       <br>
 

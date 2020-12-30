@@ -9,8 +9,19 @@
       <br>
 
       <hint-text
+        minHeight="100px"
         flavortext="メモ帳が永久にロックされてしまった・・・"
-        text="パスワードを入力したときに何か変化しませんかあ？">
+        text="あれー、パスワードを入力したときに何か変化しませんでしたかあ？">
+
+        <v-avatar
+          size="64px"
+          class="ht-avatar"
+          >
+          <img
+            src="@/assets/avatar_mamimi.png"
+          />
+        </v-avatar>
+
       </hint-text>
       <br>
 

@@ -14,24 +14,29 @@
           lg="1"
           xl="1"
           >
+        <slot>
           <v-avatar
-            size="36px"
+            size="64px"
             class="ht-avatar"
             color="#888"
             >
-            <span
-              v-if="iconimage == ''"
-              class="white--text headline"
-              >
-              P
-            </span>
-          </v-avatar>
+              <span
+                style="background-color:#888;"
+                class="white--text headline"
+                >
+                P
+              </span>
+            </v-avatar>
+          </slot>
         </v-col>
 
         <v-col
           cols="9"
           >
-          <div class="balloon">
+          <div
+            class="balloon"
+            :style="{ 'min-height': minHeight }"
+            >
             <v-fade-transition>
               <div
                 v-if="trans"
@@ -58,9 +63,9 @@
   export default {
     name: 'HintText',
     props: {
-      iconimage: {
+      minHeight: {
         type: String,
-        default: () => { return "" }
+        default: () => { return "200px" }
       },
       text: {
         type: String,
@@ -102,16 +107,10 @@
   position: relative;
   padding: 10px 20px;
   width: 100%;
-  min-height: 200px;
   font-size: 20px;
   border: 0px solid #666;
   border-radius: 4px;
   box-shadow: 0 0 4px -1px #668AD8 inset;
-}
-
-.balloon p {
-  margin: 0;
-  padding: 0;
 }
 
 .ht-avatar {

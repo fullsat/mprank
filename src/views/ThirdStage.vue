@@ -4,15 +4,24 @@
       <v-card>
         <v-card-title>3rd STAGE</v-card-title>
         <v-card-subtitle>
-          <h1>～見た目に騙されるな！～</h1>
+          <h2>見た目に騙されるな！</h2>
         </v-card-subtitle>
       </v-card>
       <br>
 
       <hint-text
+        minHeight="150px"
         :text="hinttext"
         hiddentext=""
         >
+        <v-avatar
+          size="64px"
+          class="ht-avatar"
+          >
+          <img
+            src="@/assets/avatar_mamimi.png"
+          />
+        </v-avatar>
       </hint-text>
       <br>
 
@@ -55,13 +64,44 @@
             :search="search"
             :filter="filter"
           >
-          <template v-slot:prepend="{ item }">
+          <template
+            v-slot:prepend="{ item }"
+            >
             <v-icon @click="selectColor(item)" :color="item.color"> mdi-crop-square </v-icon>
             
           </template>
           </v-treeview>
         </v-card-text>
       </v-card>
+
+      <v-snackbar
+        top
+        color="red lighten-1"
+        centered
+        rounded="true"
+        tag="div"
+        content-class="snackbar"
+        :value="true"
+        timeout=2000
+        v-model="notification"
+        >
+        <p>不正解！チャンスはあと{{ chance }} 回</p>
+      </v-snackbar>
+
+      <v-snackbar
+        top
+        color="success"
+        centered
+        rounded="true"
+        tag="div"
+        content-class="snackbar"
+        :value="true"
+        timeout=2000
+        v-model="congmessage"
+        >
+        2st STAGE 解除成功おめでとうございます！
+      </v-snackbar>
+
     </v-container>
   </div>
 </template>
@@ -75,6 +115,8 @@ export default {
     HintText,
   },
   data: () => ({
+    notification: false,
+    congmessage: false,
     selectqueue: ['','','','',''],
     trueselectqueue: ['','','','',''],
     items: [
@@ -316,6 +358,8 @@ export default {
         this.$store.commit('decrementChance', {'slot': 'chance3rd'})
         if(this.$store.state.chance3rd <= 0){
           this.$router.push({path: 'thirdstage-badend'})
+        }else{
+          this.notification = true
         }
       }
     },
@@ -326,8 +370,20 @@ export default {
       console.log("ズルは良くないよ");
       this.$store.commit('initLock')
       this.$router.push({path: '/'})
+      return
     }
+
+    this.congmessage = true
+    window.scrollTo(0,0)
   },
 }
 </script>
 
+<style>
+.snackbar{
+  text-align: center;
+  color: #222;
+  font-size: 20px;
+}
+
+</style>
