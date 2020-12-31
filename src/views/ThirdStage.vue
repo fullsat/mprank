@@ -108,6 +108,7 @@
 
 <script>
 import HintText from '@/components/HintText'
+import jshash from 'jshash'
 
 export default {
   name: 'ThirdStage',
@@ -318,8 +319,8 @@ export default {
     },
     hinttext () {
       return this.activeHint() ?
-             'あ、ごめんなさいー、黒、緑、青、赤、黄でしたぁ' :
-             '確かー、これが最後だと思いますー。ちゃんとメモしてますよー。黄、赤、黒、青、緑って書いてますねー。みんなの頭文字をローマ字にした記憶がありますー。あとぉ、どこかで英語を使った記憶があります。'
+             'あ、ごめんなさいー、「黒、緑、青、赤、黄」でしたぁ' :
+             'これが最後ですー。ちゃんとメモしてますよー。「黄、赤、黒、青、緑」って書いてますねー。たしかー、みんなの名前の頭文字をローマ字にしましたぁ。あとー、どこかで英語を使った記憶がありますー'
 
     },
     chance: function(){
@@ -351,7 +352,9 @@ export default {
       this.$store.commit('unlock', {'slot': 'lock3rd'})
     },
     next: function(){
-      if(this.search == 'kotasaase'){
+      let hashed_password = jshash.djb2(this.search)
+      console.log(hashed_password)
+      if(hashed_password == 446002833){
         this.unlockclear()
         this.$router.push({path: 'true-end'})
       }else{
@@ -373,7 +376,11 @@ export default {
       return
     }
 
-    this.congmessage = true
+    if(!this.$store.state.success2stagemessage){
+      this.$store.commit('unlock',{'slot': 'success2stagemessage'})
+      this.congmessage = true
+    }
+
     window.scrollTo(0,0)
   },
 }

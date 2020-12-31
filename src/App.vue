@@ -12,6 +12,29 @@
             Mamimi's Prank
           </router-link>
         </v-toolbar-title>
+        <v-spacer></v-spacer>
+
+        <v-icon
+          v-if="$store.state.lock1st"
+          >mdi-numeric-1-circle</v-icon>
+        <v-icon
+          v-else
+          >mdi-numeric-1-circle-outline</v-icon>
+
+        <v-icon
+          v-if="$store.state.lock2nd"
+          >mdi-numeric-2-circle</v-icon>
+        <v-icon
+          v-else
+          >mdi-numeric-2-circle-outline</v-icon>
+
+        <v-icon
+          v-if="$store.state.lock3rd"
+          >mdi-numeric-3-circle</v-icon>
+        <v-icon
+          v-else
+          >mdi-numeric-3-circle-outline</v-icon>
+
       </v-app-bar> 
     </div>
 
@@ -29,7 +52,7 @@
         tile
       >
         <v-card-text class="py-2 white--text text-center">
-          2020 - <v-icon x-small>fab fa-twitter</v-icon> <strong>sasa_full</strong>
+          Ver. {{ $version }} <v-icon x-small>fab fa-twitter</v-icon> <strong>sasa_full</strong>
         </v-card-text>
       </v-card>
     </v-footer>

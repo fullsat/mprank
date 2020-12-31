@@ -62,6 +62,8 @@
 
 <script>
 import HintText from '@/components/HintText'
+import jshash from 'jshash'
+
 export default {
   name: 'FirstStage',
   components: {
@@ -76,11 +78,15 @@ export default {
           hiddentext: "--- メモ「デビ太郎」",
         },
         {
-          hinttext: "なんかー、昔のホームページで流行った方法でメモの場所を隠した記憶はあるんですけどー、パスワードが何かは忘れちゃいましたあ",
+          hinttext: "なんかー、隠し文字っていうのでメモの場所を隠した記憶はあるんですけどー、どこに隠したか忘れちゃいましたあ",
           hiddentext: "--- メモ「デビ太郎」",
         },
         {
-          hinttext: "ローマ字だったきがしますー",
+          hinttext: "小文字のローマ字だったきがしますー",
+          hiddentext: "--- メモ「デビ太郎」",
+        },
+        {
+          hinttext: "あんまり急いで解除しない方がいいですよー",
           hiddentext: "--- メモ「デビ太郎」",
         },
       ],
@@ -101,7 +107,8 @@ export default {
       this.$store.commit('unlock', {'slot': 'lock1st'})
     },
     next: function(){
-      if(this.password == 'takayama'){
+      let hashed_password = jshash.djb2(this.password)
+      if(hashed_password == 1335515581){
         this.unlockclear()
         this.$router.push({path: 'secondstage'})
       }else{
@@ -115,17 +122,24 @@ export default {
     },
     changeText: function(event) {
       // unlock hint
-      if(event == 'debitaro'){
+      if(event == 'debitaro' || event == 'debitarou'){
         this.unlockhint()
-        let hiddenhint = '--- メモ「高山」'
+        let hiddenhint = '--- メモ「小宮」'
+        let hinttext = 'そのまま解除しようとしても駄目ですよー。もう一回メモを見直してくださいー。'
+        this.hinttextidx = 0
+        this.hinttextsrc[0].hinttext = hinttext 
         this.hinttextsrc[0].hiddentext = hiddenhint
         this.hinttextsrc[1].hiddentext = hiddenhint
         this.hinttextsrc[2].hiddentext = hiddenhint
+        this.hinttextsrc[3].hiddentext = hiddenhint
       }else{
         let hiddenhint = '--- メモ「デビ太郎」'
+        let hinttext = 'だからー、謝ってるじゃないですかぁ'
+        this.hinttextsrc[0].hinttext = hinttext 
         this.hinttextsrc[0].hiddentext = hiddenhint
         this.hinttextsrc[1].hiddentext = hiddenhint
         this.hinttextsrc[2].hiddentext = hiddenhint
+        this.hinttextsrc[3].hiddentext = hiddenhint
       }
 
       // update string

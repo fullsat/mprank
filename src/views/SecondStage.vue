@@ -119,6 +119,8 @@
 </template>
 
 <script>
+import jshash from 'jshash'
+
 export default {
   name: 'Home',
   components: {
@@ -147,9 +149,9 @@ export default {
           buttontext: "Next",
           text: function(store) {
             if(store.state.lock2ndhint){
-              return "そういえばぁパスワードは283passだったきがしますぅ"
+              return "そういえばぁ、パスワードは283passだったきがしますー"
             }else{
-              return "そういえばぁファイルに何回かパスワードかけたきがしますぅ"
+              return "そういえばぁ、ファイルに何回かパスワードかけたきがしますー"
             }
           }
         },
@@ -164,7 +166,7 @@ export default {
           icon: "mamimi",
           buttontext: "Next",
           text: function() {
-            return "うーん、ちょっと記憶にないですねぇ"
+            return "うーん、ちょっと記憶にないですねー"
           }
         },
         {
@@ -178,21 +180,21 @@ export default {
           icon: "mamimi",
           buttontext: "Next",
           text: function() {
-            return "プロデューサー・・・必死ですねぇ、ドン引きしますぅ"
+            return "プロデューサー・・・必死ですねー、ドン引きしますー"
           }
         },
         {
           icon: "P",
           buttontext: "Next",
           text: function() {
-            return "うっ、・・・何かメモしたこととか無いか？ちょっとしたことでもいいんだ"
+            return "うっ・・・ちょっと傷つく・・・それはそれとして、本当に何かメモしたこととか無いか？ちょっとしたことでもいいんだ"
           }
         },
         {
           icon: "mamimi",
           buttontext: "Next",
           text: function() {
-            return "そういわれてもぉ、覚えてないのは覚えてないですぅ"
+            return "そういわれてもー、覚えてないのは覚えてないですー"
           }
         },
         {
@@ -220,7 +222,7 @@ export default {
           icon: "mamimi",
           buttontext: "Next",
           text: function() {
-            return "でも、プロデューサーと話してたら、なんかちょっと思い出してきたかもですぅ"
+            return "でも、プロデューサーと話してたら、なんかちょっと思い出してきたかもですー"
           }
         },
         {
@@ -237,7 +239,7 @@ export default {
           icon: "mamimi",
           buttontext: "Next",
           text: function(){
-            return "はいー、同じようなやり取りをしてたら何か思い出すかもしれませんー。"
+            return "はいー、同じようなやり取りをしてたら何か思い出すかもしれませんー"
           }
         },
         {
@@ -270,7 +272,8 @@ export default {
       this.$store.commit('unlock', {'slot': 'lock2nd'})
     },
     next: function(){
-      if(this.password == '283pass'){
+      let hashed_password = jshash.djb2(this.password)
+      if(hashed_password == 2121816493){
         this.unlockclear()
         this.$router.push({path: 'thirdstage'})
       }else{
@@ -298,7 +301,10 @@ export default {
       return
     }
 
-    this.congmessage = true
+    if(!this.$store.state.success1stagemessage){
+      this.$store.commit('unlock',{'slot': 'success1stagemessage'})
+      this.congmessage = true
+    }
   }
 }
 </script>

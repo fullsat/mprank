@@ -16,6 +16,9 @@ export default new Vuex.Store({
     chance1st: 3,
     chance2nd: 3,
     chance3rd: 3,
+    success1stagemessage: false,
+    success2stagemessage: false,
+    challengenum: 0,
   },
   mutations: {
     initLock: function(state) {
@@ -28,6 +31,8 @@ export default new Vuex.Store({
       state.chance1st = 3
       state.chance2nd = 3
       state.chance3rd = 3
+      state.success1stagemessage = false
+      state.success2stagemessage = false
     },
     unlock: function(state, payload) {
       if(!payload || !payload.slot){return;}
@@ -40,6 +45,12 @@ export default new Vuex.Store({
     decrementChance: function(state, payload) {
       if(!payload || !payload.slot){return;}
       state[payload.slot]--
+    },
+    countUpChallengeNum: function(state) {
+      state.challengenum++
+    },
+    clearPlayData: function(state) {
+      state.challengenum = 0
     },
   },
   actions: {
